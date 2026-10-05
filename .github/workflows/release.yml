@@ -30,7 +30,8 @@ jobs:
         run: uv sync --locked --group build
       - name: Read the version
         id: version
-        run: echo "version=$(uv run python -c 'import wardogs_spotter; print(wardogs_spotter.__version__)')" >> "$GITHUB_OUTPUT"
+        # Python ends its lines with a carriage return on Windows: take it off.
+        run: echo "version=$(uv run python -c 'import wardogs_spotter; print(wardogs_spotter.__version__)' | tr -d '\r')" >> "$GITHUB_OUTPUT"
       - name: Check that the tag is the version
         if: github.ref_type == 'tag'
         run: |
