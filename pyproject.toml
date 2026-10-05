@@ -1,0 +1,100 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "wardogs-spotter"
+dynamic = ["version"]
+description = "Reads the Wardogs in-game map off the screen and shows the range and azimuth to your target in a HUD overlay."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Gabriel Santos" }]
+keywords = ["wardogs", "overlay", "hud", "computer-vision", "opencv", "pyside6", "mortar-calculator"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Win32 (MS Windows)",
+    "Intended Audience :: End Users/Desktop",
+    "Operating System :: Microsoft :: Windows :: Windows 10",
+    "Operating System :: Microsoft :: Windows :: Windows 11",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Games/Entertainment",
+    "Topic :: Scientific/Engineering :: Image Recognition",
+    "Typing :: Typed",
+]
+dependencies = [
+    "numpy>=2.0",
+    "opencv-python>=4.10",
+    "PySide6-Essentials>=6.7",
+    "windows-capture>=2.0; sys_platform == 'win32'",
+]
+
+[project.scripts]
+wardogs-spotter = "wardogs_spotter.cli:main"
+
+[project.urls]
+Repository = "https://github.com/gabriiellfr/wardogs-spotter"
+Issues = "https://github.com/gabriiellfr/wardogs-spotter/issues"
+Changelog = "https://github.com/gabriiellfr/wardogs-spotter/blob/main/CHANGELOG.md"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.15",
+    "pytest>=8.0",
+    "ruff>=0.9",
+]
+build = [
+    "pyinstaller>=6.10",  # the Windows executable: see packaging/
+]
+
+[tool.hatch.version]
+path = "src/wardogs_spotter/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/wardogs_spotter"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "tests", "docs", "README.md", "CHANGELOG.md", "LICENSE"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+filterwarnings = ["error"]
+
+[tool.mypy]
+files = ["src"]
+strict = true
+
+[[tool.mypy.overrides]]
+module = "windows_capture"  # ships no type information
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "wardogs_spotter.capture.window"  # uses windows_capture's untyped @event
+disallow_untyped_decorators = false
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle
+    "F",   # pyflakes
+    "W",   # pycodestyle warnings
+    "I",   # import order
+    "B",   # likely bugs
+    "UP",  # newer syntax
+    "SIM", # simplifications
+    "C4",  # comprehensions
+    "PTH", # pathlib over os.path
+    "RUF", # ruff's own
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B011"]

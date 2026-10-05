@@ -1,0 +1,41 @@
+{
+  "panel": [40, 40, 697, 698],
+  "frames": [
+    {
+      "file": "map_1.png",
+      "crosshair": [298, 553],
+      "cursor": [80.88, 70.63],
+      "player": [551, 341],
+      "heading": 282,
+      "player_coords": null,
+      "scale": null
+    },
+    {
+      "file": "map_2.png",
+      "crosshair": [278, 487],
+      "cursor": null,
+      "player": [459, 311],
+      "heading": 282,
+      "player_coords": null,
+      "scale": null
+    },
+    {
+      "file": "map_3.png",
+      "crosshair": [334, 619],
+      "cursor": [80.69, 66.0],
+      "player": [459, 311],
+      "heading": 282,
+      "player_coords": [83.506, 72.939],
+      "scale": 44.388
+    },
+    {
+      "file": "map_4.png",
+      "crosshair": [400, 528],
+      "cursor": [85.46, 67.85],
+      "player": [351, 403],
+      "heading": 90,
+      "player_coords": [83.422, 73.049],
+      "scale": 24.041
+    }
+  ]
+}

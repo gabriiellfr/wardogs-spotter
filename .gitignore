@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+build/
+dist/
+
+# Tool caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Secrets and machine-local settings
+.env
+.env.*
+.claude/
+
+# Screenshots saved with F8 and the copies the `read` command marks up.
+# They are full game frames (other players' names included), so they stay local.
+screenshots/
+
+# Editors and OS
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
